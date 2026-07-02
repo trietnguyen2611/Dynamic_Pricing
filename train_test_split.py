@@ -1,11 +1,3 @@
-# =============================================================================
-# AI2008 - Group 7 - Train/Test Split
-# Dự án: AI-Driven Dynamic Pricing in Freight & Shipping Logistics
-# =============================================================================
-# File này chứa toàn bộ code cho bước Train/Test Split (Section 6 trong notebook).
-# Bạn có thể copy từng block vào notebook, hoặc chạy trực tiếp file .py này.
-# =============================================================================
-
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -21,7 +13,7 @@ from sklearn.model_selection import train_test_split
 #   Feature 5: Cancellation_Risk_Index (rủi ro huỷ: High/Moderate/Low)
 
 df = pd.read_csv("features.csv")
-print(f"Tổng số mẫu trong dataset: {df.shape[0]} dòng x {df.shape[1]} cột")
+print(f"\nTổng số mẫu trong dataset: {df.shape[0]} dòng x {df.shape[1]} cột \n")
 print(f"Các cột hiện có: {list(df.columns)}\n")
 
 
@@ -44,7 +36,7 @@ print(f"Các cột hiện có: {list(df.columns)}\n")
 
 # Liệt kê các cột categorical cần mã hóa
 categorical_columns = df.select_dtypes(include=['object', 'string']).columns.tolist()
-print(f"Các cột categorical cần mã hóa: {categorical_columns}")
+print(f"Các cột categorical cần mã hóa: {categorical_columns}\n")
 
 # Thực hiện One-Hot Encoding
 df_encoded = pd.get_dummies(df, columns=categorical_columns, drop_first=True)
@@ -53,7 +45,7 @@ df_encoded = pd.get_dummies(df, columns=categorical_columns, drop_first=True)
 bool_cols = df_encoded.select_dtypes(include=['bool']).columns
 df_encoded[bool_cols] = df_encoded[bool_cols].astype(int)
 
-print(f"Shape sau khi mã hóa: {df_encoded.shape}")
+print(f"Shape sau khi mã hóa: {df_encoded.shape}\n")
 print(f"Các cột sau mã hóa: {list(df_encoded.columns)}\n")
 
 
@@ -75,7 +67,7 @@ X = df_encoded.drop(columns=[TARGET_COLUMN])
 y = df_encoded[TARGET_COLUMN]
 
 print(f"Biến mục tiêu (y): {TARGET_COLUMN}")
-print(f"  - Giá trị min: {y.min():.2f} | max: {y.max():.2f} | trung bình: {y.mean():.2f}")
+print(f"- Giá trị min: {y.min():.2f} | max: {y.max():.2f} | trung bình: {y.mean():.2f}")
 print(f"Số lượng features (X): {X.shape[1]} cột")
 print(f"Danh sách features đầu vào:")
 for i, col in enumerate(X.columns, 1):
@@ -121,10 +113,10 @@ X_train, X_test, y_train, y_test = train_test_split(
 print("=" * 65)
 print("  KẾT QUẢ TRAIN/TEST SPLIT (80/20)")
 print("=" * 65)
-print(f"  Tổng số mẫu ban đầu: {len(df):>6d}")
-print(f"  Tập Train (80%):    {X_train.shape[0]:>6d} mẫu x {X_train.shape[1]} features")
-print(f"  Tập Test (20%):     {X_test.shape[0]:>6d} mẫu x {X_test.shape[1]} features")
-print(f"  random_state:          {RANDOM_STATE}")
+print(f"  Tổng số mẫu ban đầu  :  {len(df):>6d}")
+print(f"  Tập Train (80%)      : {X_train.shape[0]:>6d} mẫu x {X_train.shape[1]} features")
+print(f"  Tập Test (20%)       : {X_test.shape[0]:>6d} mẫu x {X_test.shape[1]} features")
+print(f"  random_state         :    {RANDOM_STATE}")
 print("=" * 65)
 print()
 
@@ -177,7 +169,7 @@ print(f"  Giá trị NaN trong y       : {nan_in_y}")
 # Kiểm tra data types
 non_numeric = X_train.select_dtypes(exclude=['number']).columns.tolist()
 if len(non_numeric) == 0:
-    print(f"  Kiểu dữ liệu X           : ✅ Tất cả numeric")
+    print(f"  Kiểu dữ liệu X            : ✅ Tất cả numeric")
 else:
     print(f"  Kiểu dữ liệu X           : ⚠️  Còn cột non-numeric: {non_numeric}")
 
