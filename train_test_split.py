@@ -195,7 +195,7 @@ print("╚═══════════════════════�
 # HƯỚNG DẪN ĐƯA VÀO NOTEBOOK
 # =============================================================================
 # Khi copy vào notebook, bạn có thể chia thành các cell như sau:
-#
+#     vcc                 kj          n      
 # CELL 1 (Markdown):
 #   ## 6. Train / Test Split
 #   **Mục tiêu:** Chia dữ liệu thành 2 tập:
