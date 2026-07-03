@@ -13,7 +13,7 @@
 
 Dự án tập trung vào việc nghiên cứu và ứng dụng các phương pháp phân tích dữ liệu, truy vấn SQL nâng cao và thuật toán học máy (Machine Learning) để giải quyết bài toán **Định giá động (Dynamic Pricing)** trong ngành Logistics và vận tải hàng hóa (Freight & Shipping). 
 
-Thông qua việc khai thác tập dữ liệu vận hành thực tế, dự án hướng tới mục tiêu tối ưu hóa doanh thu cho đơn vị vận chuyển, đồng thời cân bằng giữa cung (tài xế sẵn có) và cầu (yêu cầu đặt xe của khách hàng) tại các thời điểm và khu vực khác nhau.
+Thông qua việc khai thác tập dữ liệu chuỗi cung ứng thực tế (DataCo Supply Chain Dataset), dự án phân tích các yếu tố thị trường, phương thức vận chuyển và hành vi khách hàng. Từ đó, hướng tới mục tiêu tối ưu hóa doanh số vận chuyển, cải thiện hiệu suất chuỗi cung ứng, và xây dựng các mô hình dự báo cũng như tối ưu hóa giá cước động nhằm gia tăng lợi thế cạnh tranh cho doanh nghiệp logistics.
 
 ---
 
@@ -54,7 +54,7 @@ Dự án được xây dựng xoay quanh **3 câu hỏi nghiên cứu cốt lõi
 
 **RQ1:** *Yếu tố thị trường nào ảnh hưởng đến giá cước vận chuyển? - Which market factors affect transport price?*
 
-**RQ2:** *Mô hình AI nào dự báo và tối ưu giá cước động? - Which AI model can guess and improve the price in real time?*
+**RQ2:** *Mô hình AI nào dự báo và tối ưu giá cước động? - Which AI model can predict and improve the price in real time?*
 
 **RQ3:** *Dynamic pricing giúp tăng doanh thu freight bao nhiêu % so với giá cố định? - How much can dynamic pricing increase freight revenue over fixed price?*
 
@@ -63,31 +63,36 @@ Dự án được xây dựng xoay quanh **3 câu hỏi nghiên cứu cốt lõi
 ## 📂 Cấu trúc thư mục dự án
 
 ```text
-├── Group_7_AI_Driven......ipynb     # Jupyter Notebook chính chứa toàn bộ mã nguồn
-├── dynamic_pricing.csv              # Tập dữ liệu gốc (Dataset)
-├── freight_pricing_research.db      # Cơ sở dữ liệu SQLite sau khi xử lý dữ liệu sạch
-├── charts_img/                      # Thư mục lưu trữ các biểu đồ được xuất ra
-└── README.md                        # Hướng dẫn dự án
+├── Group_7_AI_Driven_Dynamic_Pricing_in_Freight_&_Shipping_Logistics.ipynb     # Jupyter Notebook chính chứa toàn bộ mã nguồn
+├── DataCoSupplyChainDataset.csv                                                # Tập dữ liệu chuỗi cung ứng gốc (Dataset mới)
+├── freight_pricing_research.db                                                 # Cơ sở dữ liệu SQLite sau khi xử lý dữ liệu sạch
+├── train_test_split.py                                                         # File script chia tập dữ liệu huấn luyện và kiểm tra
+├── charts_img/                                                                 # Thư mục lưu trữ các biểu đồ được xuất ra
+└── README.md                                                                   # Hướng dẫn dự án
 ```
 
 ---
 
 ## 📊 Mô tả Tập dữ liệu (Dataset Metadata)
 
-Dataset `dynamic_pricing.csv` mô phỏng thông tin vận hành của **1,000 chuyến đi**, bao gồm các thuộc tính sau:
+Dataset `DataCoSupplyChainDataset.csv` chứa thông tin vận hành của **180,519 giao dịch/đơn hàng**, bao gồm **53 thuộc tính** khác nhau phục vụ phân tích chuỗi cung ứng và định giá. Dưới đây là các cột dữ liệu chính được sử dụng trong dự án:
 
 | Tên cột | Kiểu dữ liệu | Mô tả ý nghĩa |
 | :--- | :--- | :--- |
-| `Number_of_Riders` | Integer | Số lượng khách hàng có nhu cầu đặt chuyến đi tại thời điểm đó (Cầu) |
-| `Number_of_Drivers` | Integer | Số lượng tài xế đang hoạt động và sẵn có (Cung) |
-| `Location_Category` | Categorical | Phân loại địa điểm chuyến đi (`Urban` - Thành thị, `Suburban` - Ngoại ô, `Rural` - Nông thôn) |
-| `Customer_Loyalty_Status` | Categorical | Hạng thân thiết của khách hàng (`Gold`, `Silver`, `Regular`) |
-| `Number_of_Past_Rides` | Integer | Số chuyến đi khách hàng đã thực hiện trong quá khứ |
-| `Average_Ratings` | Float | Điểm đánh giá trung bình của tài xế/khách hàng |
-| `Time_of_Booking` | Categorical | Khung thời gian đặt chuyến (`Morning`, `Afternoon`, `Evening`, `Night`) |
-| `Vehicle_Type` | Categorical | Phân khúc xe vận chuyển (`Premium` - Cao cấp, `Economy` - Tiết kiệm) |
-| `Expected_Ride_Duration` | Integer | Thời gian di chuyển dự kiến của chuyến đi (tính theo phút) |
-| `Historical_Cost_of_Ride` | Float | Chi phí thực tế (giá cước lịch sử) của chuyến đi (tính theo USD) |
+| `Type` | Categorical | Phương thức thanh toán (DEBIT, TRANSFER, CASH, PAYMENT) |
+| `Days for shipping (real)` | Integer | Số ngày vận chuyển thực tế của đơn hàng |
+| `Days for shipment (scheduled)` | Integer | Số ngày vận chuyển dự kiến theo lịch trình |
+| `Benefit per order` | Float | Lợi nhuận thu được trên mỗi đơn hàng (USD) |
+| `Sales` | Float | Doanh số/giá trị sản phẩm bán ra (đại diện cho doanh số vận chuyển hàng hóa - USD) |
+| `Delivery Status` | Categorical | Trạng thái giao hàng (Late delivery, Advance shipping, Shipping on time, Shipping canceled) |
+| `Late_delivery_risk` | Integer | Rủi ro giao hàng trễ (1: Có rủi ro giao hàng trễ, 0: Không) |
+| `Category Name` | Categorical | Tên danh mục của sản phẩm được vận chuyển |
+| `Customer Segment` | Categorical | Phân khúc khách hàng (Consumer, Corporate, Home Office) |
+| `Market` | Categorical | Thị trường khu vực đích (Pacific Asia, USCA, Europe, LATAM, Africa) |
+| `Order Item Quantity` | Integer | Số lượng sản phẩm của mặt hàng trong đơn hàng |
+| `Order Item Product Price` | Float | Giá gốc của sản phẩm được đặt |
+| `Order Profit Per Order` | Float | Lợi nhuận của đơn hàng (USD) |
+| `Shipping Mode` | Categorical | Phương thức vận chuyển (Standard Class, Second Class, First Class, Same Day) |
 
 ---
 
