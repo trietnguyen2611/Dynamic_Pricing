@@ -1,7 +1,7 @@
-# ✦ AI2008 - Nhóm 7: Phân Tích & Định Giá Động Trong Freight & Shipping Logistics
+# ✦ AI2008 - Group 7: Analysis & Dynamic Pricing in Freight & Shipping Logistics
 
 <p align="center">
-  <strong>Phân Tích & Định Giá Động Bằng Trí Tuệ Nhân Tạo Trong Logistics</strong>
+  <strong>Analysis & Dynamic Pricing with Artificial Intelligence in Logistics</strong>
 </p>
 
 <p align="center">
@@ -14,115 +14,115 @@
 
 ---
 
-## ✦ Giới thiệu dự án
+## ✦ Project Introduction
 
-Dự án tập trung vào việc nghiên cứu và ứng dụng các phương pháp phân tích dữ liệu, truy vấn SQL nâng cao và thuật toán học máy (Machine Learning) để giải quyết bài toán **Định giá động (Dynamic Pricing)** trong ngành Logistics và vận tải hàng hóa (Freight & Shipping).
+This project studies and uses data analysis, advanced SQL queries, and machine learning algorithms to solve the **Dynamic Pricing** problem in Logistics and freight transport (Freight & Shipping).
 
-Thông qua việc khai thác tập dữ liệu chuỗi cung ứng thực tế (DataCo Supply Chain Dataset), dự án phân tích các yếu tố thị trường, phương thức vận chuyển và hành vi khách hàng. Từ đó, hướng tới mục tiêu tối ưu hóa doanh số vận chuyển, cải thiện hiệu suất chuỗi cung ứng, và xây dựng các mô hình dự báo cũng như tối ưu hóa giá cước động nhằm gia tăng lợi thế cạnh tranh cho doanh nghiệp logistics.
+We use a real supply chain dataset (DataCo Supply Chain Dataset) to study market factors, shipping methods, and customer behavior. The goal is to improve shipping sales, make the supply chain better, and build models that can predict and optimize shipping prices in real time. This helps logistics companies compete better.
 
 ---
 
-## ✦ Câu hỏi nghiên cứu (Research Questions)
+## ✦ Research Questions
 
-Dự án được xây dựng xoay quanh 3 câu hỏi nghiên cứu cốt lõi:
+The project is built around 3 main research questions:
 
 > [!TIP]
-> ### ✦ RQ1: Market Factors (Yếu tố thị trường)
-> - **Yếu tố thị trường nào ảnh hưởng đến giá cước vận chuyển?**
+> ### ✦ RQ1: Market Factors
+> - **Which market factors affect shipping prices?**
 > - *Which market factors affect transport price?*
 
 > [!NOTE]
-> ### ✦ RQ2: AI Modeling (Mô hình AI)
-> - **Mô hình AI nào dự báo và tối ưu giá cước động?**
+> ### ✦ RQ2: AI Modeling
+> - **Which AI model can predict and improve dynamic shipping prices?**
 > - *Which AI model can predict and improve the price in real time?*
 
 > [!IMPORTANT]
-> ### ✦ RQ3: Revenue Impact (Hiệu quả doanh thu)
-> - **Dynamic pricing giúp tăng doanh thu freight bao nhiêu % so với giá cố định?**
+> ### ✦ RQ3: Revenue Impact
+> - **How much can dynamic pricing increase freight revenue compared to fixed prices?**
 > - *How much can dynamic pricing increase freight revenue over fixed price?*
 
 ---
 
-## ✦ Hướng dẫn chạy dự án
+## ✦ How to Run the Project
 
-### Yêu cầu hệ thống
-* Python 3.8 trở lên
-* Trình quản lý gói `pip`
+### System Requirements
+* Python 3.8 or higher
+* Package manager `pip`
 
-### Các bước cài đặt
+### Installation Steps
 
-1. **Clone thư mục dự án hoặc tải mã nguồn về máy tính.**
-2. **Tạo môi trường ảo Python (khuyên dùng):**
+1. **Clone the project folder or download the source code to your computer.**
+2. **Create a Python virtual environment (recommended):**
    ```bash
-   # Trên macOS/Linux
+   # On macOS/Linux
    python3 -m venv .venv
    source .venv/bin/activate
 
-   # Trên Windows
+   # On Windows
    python -m venv .venv
    .venv\Scripts\activate
    ```
-3. **Cài đặt các thư viện cần thiết:**
+3. **Install the needed libraries:**
    ```bash
    pip install pandas numpy matplotlib seaborn scikit-learn notebook scipy sqlite3
    ```
-4. **Khởi động Jupyter Notebook:**
-   Mở file `Group_7_AI_Driven_Dynamic_Pricing_in_Freight_&_Shipping_Logistics.ipynb` trong Jupyter Notebook (hoặc bất kỳ nền tảng nào hỗ trợ chạy `.ipynb`) và chạy tuần tự các cell.
+4. **Start Jupyter Notebook:**
+   Open the file `Group_7_AI_Driven_Dynamic_Pricing_in_Freight_&_Shipping_Logistics.ipynb` in Jupyter Notebook (or any platform that supports `.ipynb` files) and run the cells one by one.
 
 ---
 
-## ✦ Cấu trúc thư mục dự án
+## ✦ Project Folder Structure
 
 ```text
 .
 ├── Group_7_AI_Driven_Dynamic_Pricing_in_Freight_&_Shipping_Logistics.ipynb  # Jupyter Notebook
-├── DataCoSupplyChainDataset.csv                                         # Tập dữ liệu chuỗi cung ứng gốc
-├── freight_pricing_research.db                                          # Cơ sở dữ liệu SQLite sạch
-├── train_test_split.py                                                  # Script chia tập train/test
-├── charts_img/                                                          # Thư mục lưu trữ biểu đồ xuất ra
-└── README.md                                                            # Hướng dẫn dự án
+├── DataCoSupplyChainDataset.csv                                         # Original supply chain dataset
+├── freight_pricing_research.db                                          # Clean SQLite database
+├── train_test_split.py                                                  # Script to split train/test sets
+├── charts_img/                                                          # Folder for output charts
+└── README.md                                                            # Project guide
 ```
 
 ---
 
-## ✦ Mô tả Tập dữ liệu (Dataset Metadata)
+## ✦ Dataset Description (Dataset Metadata)
 
-Tập dữ liệu `DataCoSupplyChainDataset.csv` chứa thông tin vận hành của **180,519 giao dịch/đơn hàng**, bao gồm **53 thuộc tính** khác nhau. Dưới đây là các cột dữ liệu chính được sử dụng:
+The dataset `DataCoSupplyChainDataset.csv` has information about **180,519 transactions/orders** and **53 different attributes**. Below are the main columns we use:
 
-| Tên cột | Kiểu dữ liệu | Mô tả ý nghĩa |
+| Column Name | Data Type | Meaning |
 | :--- | :--- | :--- |
-| **Type** | `Categorical` | Phương thức thanh toán (DEBIT, TRANSFER, CASH, PAYMENT) |
-| **Days for shipping (real)** | `Integer` | Số ngày vận chuyển thực tế của đơn hàng |
-| **Days for shipment (scheduled)** | `Integer` | Số ngày vận chuyển dự kiến theo lịch trình |
-| **Benefit per order** | `Float` | Lợi nhuận thu được trên mỗi đơn hàng (USD) |
-| **Sales** | `Float` | Doanh số/giá trị sản phẩm bán ra (đại diện cho doanh số vận chuyển hàng hóa - USD) |
-| **Delivery Status** | `Categorical` | Trạng thái giao hàng (Late delivery, Advance shipping, Shipping on time, Shipping canceled) |
-| **Late_delivery_risk** | `Integer` | Rủi ro giao hàng trễ (1: Có rủi ro giao hàng trễ, 0: Không) |
-| **Category Name** | `Categorical` | Tên danh mục của sản phẩm được vận chuyển |
-| **Customer Segment** | `Categorical` | Phân khúc khách hàng (Consumer, Corporate, Home Office) |
-| **Market** | `Categorical` | Thị trường khu vực đích (Pacific Asia, USCA, Europe, LATAM, Africa) |
-| **Order Item Quantity** | `Integer` | Số lượng sản phẩm của mặt hàng trong đơn hàng |
-| **Order Item Product Price** | `Float` | Giá gốc của sản phẩm được đặt |
-| **Order Profit Per Order** | `Float` | Lợi nhuận của đơn hàng (USD) |
-| **Shipping Mode** | `Categorical` | Phương thức vận chuyển (Standard Class, Second Class, First Class, Same Day) |
+| **Type** | `Categorical` | Payment method (DEBIT, TRANSFER, CASH, PAYMENT) |
+| **Days for shipping (real)** | `Integer` | Real number of days to ship the order |
+| **Days for shipment (scheduled)** | `Integer` | Planned number of days to ship |
+| **Benefit per order** | `Float` | Profit from each order (USD) |
+| **Sales** | `Float` | Sales / product value (represents shipping sales - USD) |
+| **Delivery Status** | `Categorical` | Delivery status (Late delivery, Advance shipping, Shipping on time, Shipping canceled) |
+| **Late_delivery_risk** | `Integer` | Risk of late delivery (1: Yes, 0: No) |
+| **Category Name** | `Categorical` | Name of the product category being shipped |
+| **Customer Segment** | `Categorical` | Customer group (Consumer, Corporate, Home Office) |
+| **Market** | `Categorical` | Target market area (Pacific Asia, USCA, Europe, LATAM, Africa) |
+| **Order Item Quantity** | `Integer` | Number of items in the order |
+| **Order Item Product Price** | `Float` | Original price of the ordered product |
+| **Order Profit Per Order** | `Float` | Order profit (USD) |
+| **Shipping Mode** | `Categorical` | Shipping method (Standard Class, Second Class, First Class, Same Day) |
 
 ---
 
-## ✦ Thông tin dự án (Project Metadata)
+## ✦ Project Information (Project Metadata)
 
 <table width="100%">
   <tr>
     <td width="33%" valign="top">
-      <strong>Thông tin môn học</strong><br>
-      • Môn học: ADY201m<br>
-      • Lớp học: AI2008
+      <strong>Course Information</strong><br>
+      • Course: ADY201m<br>
+      • Class: AI2008
     </td>
     <td width="34%" valign="top">
-      <strong>Đề tài nghiên cứu</strong><br>
+      <strong>Research Topic</strong><br>
       <em>AI-Driven Dynamic Pricing in Freight & Shipping Logistics</em>
     </td>
     <td width="33%" valign="top">
-      <strong>Thành viên nhóm (Nhóm 7)</strong><br>
+      <strong>Group Members (Group 7)</strong><br>
       • Nguyễn Phạm Minh Triết<br>
       • Nguyễn Mạnh Hoàng<br>
       • Nguyễn Hoàng Duy Tiến<br>
