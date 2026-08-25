@@ -1,8 +1,11 @@
-# ✦ AI2008 - Group 7: Analysis & Dynamic Pricing in Freight & Shipping Logistics
+# AI-Driven Dynamic Pricing in Freight & Shipping Logistics
 
-<p align="center">
-  <strong>Analysis & Dynamic Pricing with Artificial Intelligence in Logistics</strong>
-</p>
+**AI2008 – Group 7**  
+Research project on **dynamic pricing** for freight and shipping using machine learning and data analysis.
+
+This project studies how market factors, shipping modes, and customer behavior affect transport prices. We build AI models to predict and optimize shipping prices in real time to increase revenue for logistics companies.
+
+---
 
 <p align="center">
   <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.8+-cc785c?style=flat-square&logo=python&logoColor=white" alt="Python"/></a>
@@ -14,119 +17,102 @@
 
 ---
 
-## ✦ Project Introduction
+## Project Overview
 
-This project studies and uses data analysis, advanced SQL queries, and machine learning algorithms to solve the **Dynamic Pricing** problem in Logistics and freight transport (Freight & Shipping).
-
-We use a real supply chain dataset (DataCo Supply Chain Dataset) to study market factors, shipping methods, and customer behavior. The goal is to improve shipping sales, make the supply chain better, and build models that can predict and optimize shipping prices in real time. This helps logistics companies compete better.
-
----
-
-## ✦ Research Questions
-
-The project is built around 3 main research questions:
+We use the real **DataCo Supply Chain Dataset** (180,519 orders) to answer three research questions about dynamic pricing in logistics:
 
 > [!TIP]
-> ### ✦ RQ1: Market Factors
-> - **Which market factors affect shipping prices?**
-> - *Which market factors affect transport price?*
+> ### RQ1: Market Factors
+> Which market factors affect transport and shipping prices?
 
 > [!NOTE]
-> ### ✦ RQ2: AI Modeling
-> - **Which AI model can predict and improve dynamic shipping prices?**
-> - *Which AI model can predict and improve the price in real time?*
+> ### RQ2: AI Modeling
+> Which machine learning model can best predict and improve dynamic pricing in real time?
 
 > [!IMPORTANT]
-> ### ✦ RQ3: Revenue Impact
-> - **How much can dynamic pricing increase freight revenue compared to fixed prices?**
-> - *How much can dynamic pricing increase freight revenue over fixed price?*
+> ### RQ3: Revenue Impact
+> How much extra revenue can dynamic pricing create compared to fixed prices?
 
 ---
 
-## ✦ How to Run the Project
+## How to Run the Project
 
-### System Requirements
-* Python 3.8 or higher
-* Package manager `pip`
+### Requirements
+- Python 3.8 or higher
+- `pip` package manager
 
 ### Installation Steps
 
-1. **Clone the project folder or download the source code to your computer.**
-2. **Create a Python virtual environment (recommended):**
-   ```bash
-   # On macOS/Linux
-   python3 -m venv .venv
-   source .venv/bin/activate
+1. Clone or download this repository.
+2. Create a virtual environment (recommended):
 
-   # On Windows
-   python -m venv .venv
-   .venv\Scripts\activate
-   ```
-3. **Install the needed libraries:**
-   ```bash
-   pip install pandas numpy matplotlib seaborn scikit-learn notebook scipy sqlite3
-   ```
-4. **Start Jupyter Notebook:**
-   Open the file `Group_7_AI_Driven_Dynamic_Pricing_in_Freight_&_Shipping_Logistics.ipynb` in Jupyter Notebook (or any platform that supports `.ipynb` files) and run the cells one by one.
+```bash
+# macOS / Linux
+python3 -m venv .venv
+source .venv/bin/activate
+
+# Windows
+python -m venv .venv
+.venv\Scripts\activate
+```
+
+3. Install required libraries:
+
+```bash
+pip install pandas numpy matplotlib seaborn scikit-learn notebook scipy
+```
+
+4. Open the main notebook and run all cells:
+
+`Group_7_AI_Driven_Dynamic_Pricing_in_Freight_&_Shipping_Logistics.ipynb`
 
 ---
 
-## ✦ Project Folder Structure
+## Project Structure
 
 ```text
 .
-├── Group_7_AI_Driven_Dynamic_Pricing_in_Freight_&_Shipping_Logistics.ipynb  # Jupyter Notebook
-├── DataCoSupplyChainDataset.csv                                         # Original supply chain dataset
-├── freight_pricing_research.db                                          # Clean SQLite database
-├── train_test_split.py                                                  # Script to split train/test sets
-├── charts_img/                                                          # Folder for output charts
-└── README.md                                                            # Project guide
+├── Group_7_AI_Driven_Dynamic_Pricing_in_Freight_&_Shipping_Logistics.ipynb  # Main Jupyter Notebook
+├── DataCoSupplyChainDataset.csv                                         # Original supply chain data
+├── freight_pricing_research.db                                          # Cleaned SQLite database
+├── train_test_split.py                                                  # Train/test split script
+├── charts_img/                                                          # Output charts folder
+└── README.md                                                            # This file
 ```
 
 ---
 
-## ✦ Dataset Description (Dataset Metadata)
+## Dataset Overview
 
-The dataset `DataCoSupplyChainDataset.csv` has information about **180,519 transactions/orders** and **53 different attributes**. Below are the main columns we use:
+The dataset contains **180,519 orders** and **53 columns**. Main columns used in this research:
 
-| Column Name | Data Type | Meaning |
+| Column Name | Type | Description |
 | :--- | :--- | :--- |
-| **Type** | `Categorical` | Payment method (DEBIT, TRANSFER, CASH, PAYMENT) |
-| **Days for shipping (real)** | `Integer` | Real number of days to ship the order |
-| **Days for shipment (scheduled)** | `Integer` | Planned number of days to ship |
-| **Benefit per order** | `Float` | Profit from each order (USD) |
-| **Sales** | `Float` | Sales / product value (represents shipping sales - USD) |
-| **Delivery Status** | `Categorical` | Delivery status (Late delivery, Advance shipping, Shipping on time, Shipping canceled) |
-| **Late_delivery_risk** | `Integer` | Risk of late delivery (1: Yes, 0: No) |
-| **Category Name** | `Categorical` | Name of the product category being shipped |
-| **Customer Segment** | `Categorical` | Customer group (Consumer, Corporate, Home Office) |
-| **Market** | `Categorical` | Target market area (Pacific Asia, USCA, Europe, LATAM, Africa) |
-| **Order Item Quantity** | `Integer` | Number of items in the order |
-| **Order Item Product Price** | `Float` | Original price of the ordered product |
-| **Order Profit Per Order** | `Float` | Order profit (USD) |
-| **Shipping Mode** | `Categorical` | Shipping method (Standard Class, Second Class, First Class, Same Day) |
+| Type | Categorical | Payment method (DEBIT, TRANSFER, CASH, PAYMENT) |
+| Days for shipping (real) | Integer | Actual shipping days |
+| Days for shipment (scheduled) | Integer | Planned shipping days |
+| Benefit per order | Float | Profit per order (USD) |
+| Sales | Float | Order value / sales (USD) |
+| Delivery Status | Categorical | Late, on time, canceled, etc. |
+| Late_delivery_risk | Integer | 1 = risk of late delivery, 0 = no risk |
+| Category Name | Categorical | Product category |
+| Customer Segment | Categorical | Consumer, Corporate, Home Office |
+| Market | Categorical | Pacific Asia, USCA, Europe, LATAM, Africa |
+| Order Item Quantity | Integer | Quantity of items |
+| Order Item Product Price | Float | Product unit price |
+| Order Profit Per Order | Float | Order profit (USD) |
+| Shipping Mode | Categorical | Standard, Second, First, Same Day |
 
 ---
 
-## ✦ Project Information (Project Metadata)
+## Project Information
 
-<table width="100%">
-  <tr>
-    <td width="33%" valign="top">
-      <strong>Course Information</strong><br>
-      • Course: ADY201m<br>
-      • Class: AI2008
-    </td>
-    <td width="34%" valign="top">
-      <strong>Research Topic</strong><br>
-      <em>AI-Driven Dynamic Pricing in Freight & Shipping Logistics</em>
-    </td>
-    <td width="33%" valign="top">
-      <strong>Group Members (Group 7)</strong><br>
-      • Nguyễn Phạm Minh Triết<br>
-      • Nguyễn Mạnh Hoàng<br>
-      • Nguyễn Hoàng Duy Tiến<br>
-      • Nguyễn Bùi Anh Duy
-    </td>
-  </tr>
-</table>
+| Course | Research Topic | Group Members |
+| :--- | :--- | :--- |
+| ADY201m – AI2008 | AI-Driven Dynamic Pricing in Freight & Shipping Logistics | Nguyễn Phạm Minh Triết<br>Nguyễn Mạnh Hoàng<br>Nguyễn Hoàng Duy Tiến<br>Nguyễn Bùi Anh Duy |
+
+---
+
+## Keywords
+
+`dynamic pricing` `freight logistics` `shipping price prediction` `machine learning logistics` `supply chain AI` `scikit-learn` `pandas` `DataCo dataset` `revenue optimization`
